@@ -11,13 +11,6 @@
         </b-col>
         <b-col cols="6">
           <p class="form-label">
-            <strong>{{ownershipLabel}}</strong>
-            <br>
-            {{ownershipData}}
-          </p>
-        </b-col>
-        <b-col cols="6">
-          <p class="form-label">
             <strong>{{capitalPartnersLabel}}</strong>
             <br>
             {{capitalPartnersData}}
@@ -39,9 +32,9 @@
         </b-col>
         <b-col cols="6">
           <p class="form-label">
-            <strong>{{personnelLabel}}</strong>
+            <strong>{{percentLabel}}</strong>
             <br>
-            {{personnelData}}
+            {{percentData}}
           </p>
         </b-col>
       </b-row>
@@ -50,7 +43,7 @@
 </template>
 
 <script>
-import {formatCurrency} from "~/utils/formatterHelper";
+import {formatCurrency, formatPercent} from "~/utils/formatterHelper";
 
 export default {
   name: "FormattedExample",
@@ -65,17 +58,11 @@ export default {
       const value = 100000
       return formatCurrency(value, 'it', 'EUR') || this.notAvailableMsg;
     },
-    ownershipLabel() {
-      return 'Impresa appartenente al gruppo:';
-    },
-    ownershipData() {
-      return this.notAvailableMsg;
-    },
     capitalPartnersLabel() {
       return 'Sottoscritto:';
     },
     capitalPartnersData() {
-      const value = 123456.445
+      const value = 123456.44523
       return formatCurrency(value, 'it', 'EUR') || this.notAvailableMsg;
 
     },
@@ -91,17 +78,17 @@ export default {
     },
     capitalPartnersEffectiveData() {
       const shareCapital = 34564345.33
-      const calledUpCapital = 1234.33;
+      const calledUpCapital = 1234.31132434;
       if (shareCapital && calledUpCapital) {
         return formatCurrency((shareCapital - calledUpCapital), 'it', 'EUR');
       }
       return formatCurrency(shareCapital, 'it', 'EUR') || this.notAvailableMsg;
     },
-    personnelLabel() {
-      return 'Numero addetti:';
+    percentLabel() {
+      return 'Percent value:';
     },
-    personnelData() {
-      return this.notAvailableMsg;
+    percentData() {
+      return formatPercent(0.2342, 'it');
     },
   }
 }
